@@ -5,7 +5,7 @@ import { Slider } from '@/components/ui/slider'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Copy, Check, ShieldCheck } from '@phosphor-icons/react'
-import { toast } from 'sonner'
+import { toast, Toaster } from 'sonner'
 import { PasswordDisplay } from '@/components/PasswordDisplay'
 import { StrengthIndicator } from '@/components/StrengthIndicator'
 import {
@@ -71,8 +71,10 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <Toaster position="top-center" richColors />
+      <div className="min-h-screen bg-background p-4 md:p-8">
+        <div className="max-w-2xl mx-auto space-y-6">
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-3">
             <ShieldCheck size={40} weight="duotone" className="text-accent" />
@@ -267,8 +269,9 @@ function App() {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

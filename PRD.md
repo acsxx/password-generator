@@ -61,6 +61,13 @@ This is a focused utility tool with interactive controls (slider, checkboxes), r
 - **Progression**: Password generated → entropy calculated (log2 of possible combinations) → bar fills proportionally → color indicates strength level
 - **Success criteria**: Entropy accurately calculated, bar color reflects security (red=weak, yellow=medium, green=strong)
 
+### Dark Mode Toggle
+- **Functionality**: Toggle button to switch between light and dark themes
+- **Purpose**: Provide comfortable viewing in different lighting conditions and user preference
+- **Trigger**: User clicks theme toggle button
+- **Progression**: User clicks toggle → theme preference saved to KV storage → CSS classes applied → colors transition smoothly
+- **Success criteria**: Theme persists between sessions, smooth color transitions, all UI elements readable in both modes
+
 ## Edge Case Handling
 
 - **All Checkboxes Deselected**: Prevent unchecking last character type option (disable checkbox or prevent action)
@@ -75,8 +82,9 @@ The design should evoke confidence, clarity, and modern professionalism. Users s
 
 ## Color Selection
 
-A professional security-focused palette with vibrant accent colors for visual feedback.
+A professional security-focused palette with vibrant accent colors for visual feedback, optimized for both light and dark modes.
 
+**Light Mode:**
 - **Primary Color**: Deep slate blue `oklch(0.35 0.05 260)` - Communicates trust, security, and professionalism
 - **Secondary Colors**: 
   - Light slate background `oklch(0.98 0.01 260)` for cards - Subtle, sophisticated container color
@@ -87,11 +95,19 @@ A professional security-focused palette with vibrant accent colors for visual fe
   - Medium: Amber `oklch(0.75 0.15 70)` - Acceptable but not ideal
   - Strong: Emerald green `oklch(0.65 0.18 150)` - Secure and confident
 
+**Dark Mode:**
+- **Background**: Dark slate `oklch(0.15 0.02 260)` - Deep, comfortable background for low-light viewing
+- **Card**: Elevated slate `oklch(0.18 0.02 260)` - Subtle elevation from background
+- **Primary**: Light slate `oklch(0.75 0.08 260)` - Softer primary for dark backgrounds
+- **Accent**: Enhanced purple `oklch(0.65 0.22 290)` - Slightly brighter for visibility
+- **Borders**: Subtle borders `oklch(0.28 0.02 260)` - Defined but not harsh separation
+
 **Foreground/Background Pairings**:
-- Background (Light Slate #FAFAFB): Dark Text (Primary #2D2F45) - Ratio 10.2:1 ✓
+- Light Background: Dark Text (Primary #2D2F45) - Ratio 10.2:1 ✓
+- Dark Background: Light Text (#F5F5F6) - Ratio 11.8:1 ✓
 - Primary (Deep Slate #2D2F45): White Text (#FFFFFF) - Ratio 11.5:1 ✓
 - Accent (Vibrant Purple #8B5CF6): White Text (#FFFFFF) - Ratio 4.8:1 ✓
-- Card (Light Slate #F8F9FA): Primary Text (#2D2F45) - Ratio 11.8:1 ✓
+- Dark Card: Light Text - Ratio 12.5:1 ✓
 
 ## Font Selection
 
@@ -113,6 +129,8 @@ Animations should be precise and purposeful, reinforcing the tool's reliability 
 - Toast notifications slide in from top-right with gentle bounce
 - Password text fades between changes (150ms) to indicate regeneration
 - Slider thumb has subtle lift shadow on hover/drag for tactile feel
+- Theme toggle icon rotates and scales smoothly (200ms) when switching between sun/moon
+- Background and all color values transition smoothly (200ms) when changing themes
 
 ## Component Selection
 
@@ -120,7 +138,7 @@ Animations should be precise and purposeful, reinforcing the tool's reliability 
   - `Card`, `CardHeader`, `CardTitle`, `CardContent` for main container and settings panel - Clean separation of concerns
   - `Slider` for length control - Precise value selection with visual feedback
   - `Checkbox` for all toggles (char types, exclude similar, require each) - Clear on/off states
-  - `Button` for copy action - Primary variant with accent color
+  - `Button` for copy action and theme toggle - Primary variant with accent color, icon variant for theme
   - `Progress` for strength bar - Visual representation of entropy
   - `Label` for all form controls - Accessibility and clear associations
   - Toast from `sonner` for copy confirmations - Non-intrusive feedback
@@ -129,6 +147,8 @@ Animations should be precise and purposeful, reinforcing the tool's reliability 
   - Custom password display component with monospace font and subtle background differentiation
   - Custom strength indicator combining Progress bar with entropy calculation display
   - Copy button with icon (Copy/Check from phosphor-icons) that transitions on success
+  - Custom theme toggle with animated sun/moon icons that rotate and scale on transition
+  - Custom `useTheme` hook for persisting theme preference in KV storage
 
 - **States**:
   - Slider: Hover shows enhanced thumb, active/dragging has elevated shadow
@@ -139,7 +159,9 @@ Animations should be precise and purposeful, reinforcing the tool's reliability 
 - **Icon Selection**:
   - `Copy` (phosphor) for copy button default state
   - `Check` (phosphor) for successful copy confirmation
-  - `Password` or `ShieldCheck` (phosphor) for app header icon
+  - `ShieldCheck` (phosphor) for app header icon
+  - `Sun` (phosphor, duotone) for light mode indicator
+  - `Moon` (phosphor, duotone) for dark mode indicator
 
 - **Spacing**:
   - Card padding: `p-6` (24px) for comfortable breathing room

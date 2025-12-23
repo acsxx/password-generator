@@ -8,6 +8,7 @@ import { Copy, Check, ShieldCheck } from '@phosphor-icons/react'
 import { toast, Toaster } from 'sonner'
 import { PasswordDisplay } from '@/components/PasswordDisplay'
 import { StrengthIndicator } from '@/components/StrengthIndicator'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import {
   generatePassword,
   calculateEntropy,
@@ -73,10 +74,10 @@ function App() {
   return (
     <>
       <Toaster position="top-center" richColors />
-      <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="min-h-screen bg-background p-4 md:p-8 transition-colors duration-200">
         <div className="max-w-2xl mx-auto space-y-6">
-        <div className="text-center space-y-2">
-          <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
             <ShieldCheck size={40} weight="duotone" className="text-accent" />
             <h1
               className="text-4xl font-bold text-foreground tracking-tight"
@@ -85,10 +86,12 @@ function App() {
               Password Generator
             </h1>
           </div>
-          <p className="text-muted-foreground">
-            Generate secure, cryptographic passwords instantly
-          </p>
+          <ThemeToggle />
         </div>
+        
+        <p className="text-muted-foreground text-center">
+          Generate secure, cryptographic passwords instantly
+        </p>
 
         <Card>
           <CardContent className="p-6 space-y-6">
